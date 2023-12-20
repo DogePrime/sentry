@@ -15,7 +15,9 @@
     "docs": "pnpm -filter @sentry/docs run start",
     "lint": "pnpm recursive run lint",
     "web": "pnpm -filter @sentry/web-connect run dev",
-    "postinstall": "node ./postinstall"
+    "postinstall": "node ./postinstall",
+    "build-cli": "pnpm -filter @sentry/core run build && pnpm -r -filter @sentry/sentry-node-cli run compile",
+    "start-cli": "pnpm -r -filter @sentry/sentry-node-cli run start-node"
   },
   "dependencies": {
     "ethers": "6.8.1"
