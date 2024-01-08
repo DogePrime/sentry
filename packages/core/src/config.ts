@@ -1,10 +1,14 @@
 export let config = {
   arbitrumBlockExplorer: "https://arbiscan.io",
   arbitrumGoerliBlockExplorer: "https://goerli.arbiscan.io",
-  arbitrumOneJsonRpcUrl: process.env.arbitrumOneJsonRpcUrl,
+  arbitrumOneJsonRpcUrl: process.env.arbitrumOneJsonRpcUrl
+    ? process.env.arbitrumOneJsonRpcUrl
+    : "https://arb-mainnet.g.alchemy.com/v2/p_LSgTIj_JtEt3JPM7IZIZFL1a70yvQJ",
   arbitrumOneWebSocketUrl:
     "wss://arb-mainnet.g.alchemy.com/v2/p_LSgTIj_JtEt3JPM7IZIZFL1a70yvQJ",
-  defaultRpcUrl: process.env.defaultRpcUrl,
+  defaultRpcUrl: process.env.defaultRpcUrl
+    ? process.env.defaultRpcUrl
+    : "https://arb-mainnet.g.alchemy.com/v2/p_LSgTIj_JtEt3JPM7IZIZFL1a70yvQJ",
   esXaiAddress: "0x4C749d097832DE2FEcc989ce18fDc5f1BD76700c",
   esXaiDeployedBlockNumber: 157193630,
   esXaiImplementationAddress: "0x8d6c063656b00e5c37ce007c0f99848d58f19d6b",
