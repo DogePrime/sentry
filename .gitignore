@@ -19,3 +19,4 @@ build
 infrastructure/CodeSignTool-*
 
 infrastructure/CodeSignTool-*
+.env

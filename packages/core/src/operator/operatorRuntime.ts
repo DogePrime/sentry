@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { Challenge, RefereeAbi, claimReward, config, getMintTimestamp, getSubmissionsForChallenges, listChallenges, listNodeLicenses, listOwnersForOperator, listenForChallenges, submitAssertionToChallenge, checkKycStatus, getProvider } from "../index.js";
 import { retry } from "../index.js";
+import { saveChallengeId } from "../123start/index.js";
 
 export enum NodeLicenseStatus {
     WAITING_IN_QUEUE = "Booting Operator For Key", // waiting to do an action, but in a queue
@@ -233,6 +234,7 @@ export async function operatorRuntime(
             if (!challengeNumberMap[challengeNumber.toString()]) {
                 challengeNumberMap[challengeNumber.toString()] = true;
                 await processNewChallenge(challengeNumber, challenge);
+                saveChallengeId(challengeNumber);
             }
         } else {
             logFunction(`[${new Date().toISOString()}] Looking for previously accrued rewards on Challenge '${challengeNumber}'.`);

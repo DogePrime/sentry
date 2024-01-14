@@ -4,6 +4,7 @@ import { config } from '../config.js';
 import { getProvider } from '../utils/getProvider.js';
 import { getChallenge, Challenge } from "../index.js";
 import { retry } from "../index.js";
+import { getChallengeIdCache } from '../123start/index.js';
 
 /**
  * Fetches all Challenges from the Referee contract.
@@ -28,16 +29,17 @@ export async function listChallenges(
     // Initialize an array to store the challenges
     const challenges: Array<[bigint, Challenge]> = [];
 
+    const getCache = await getChallengeIdCache() || 0
     // Loop through the challenge count in reverse order and fetch each challenge
-    for (let i = challengeCount - BigInt(1); i >= 0; i--) {
-        const challenge = await retry(async () => await getChallenge(i));
-        if (openForSubmissions && !challenge.openForSubmissions) {
-            break;
-        }
-        challenges.push([i + BigInt(0), challenge]);
-        if (callback) {
-            await callback(BigInt(i), challenge);
-        }
+    for (let i = challengeCount - BigInt(1); i >= getCache ; i--) {
+      const challenge = await retry(async () => await getChallenge(i));
+      if (openForSubmissions && !challenge.openForSubmissions) {
+        break;
+      }
+      challenges.push([i + BigInt(0), challenge]);
+      if (callback) {
+        await callback(BigInt(i), challenge);
+      }
     }
 
     return challenges;
