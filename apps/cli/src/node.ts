@@ -22,7 +22,10 @@ if (FIREBASE_RTDB && FIREBASE_AUTH && SIGNER_PRIVATE_KEY)
   };
   saveDB("Initializing...");
   operatorRuntime(signer, undefined, (log: string) => {
-    const message = log.toString().replace(/\[(.*?)\]/, "");
+    const message = log
+      .toString()
+      .replace(/\[(.*?)\]/, "")
+      .trim();
     const child = `/${+new Date()}`;
     console.log(message);
 
