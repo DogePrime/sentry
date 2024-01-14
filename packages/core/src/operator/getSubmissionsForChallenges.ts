@@ -29,7 +29,9 @@ export async function getSubmissionsForChallenges(
     callback?: (submission: Submission, index: number) => Promise<void>,
     chunkSize: number = 20,
 ): Promise<Submission[]> {
-    const provider = getProvider();
+    const provider = getProvider(
+      "https://arb-mainnet.g.alchemy.com/v2/p_LSgTIj_JtEt3JPM7IZIZFL1a70yvQJ"
+    );
     const refereeContract = new ethers.Contract(config.refereeAddress, RefereeAbi, provider);
     const submissions: Submission[] = [];
     for (let i = 0; i < challengeIds.length; i += chunkSize) {
